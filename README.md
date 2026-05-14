@@ -6,7 +6,7 @@ By default, `yr` copies the current file path and selected line numbers to your 
 
 ```text
 @path/to/file.lua L29
-@path/to/file.lua L29-32
+@path/to/file.lua L29-L32
 ```
 
 It works in normal mode for the current line and visual mode for a selected line range. The referenced lines flash with a yank-style highlight so the mapping feels like a normal `y` operation.
@@ -49,7 +49,7 @@ Examples:
 
 ```text
 @lua/reference-yank/init.lua L42
-@lua/reference-yank/init.lua L42-47
+@lua/reference-yank/init.lua L42-L47
 ```
 
 ## Configuration
@@ -87,5 +87,5 @@ end, { desc = 'Yank file reference' })
 
 - Uses relative file paths from the current working directory.
 - Copies to the system clipboard register `+`.
-- Formats references as `@file Lstart` or `@file Lstart-end`.
+- Formats references as `@file Lstart` or `@file Lstart-Lend`.
 - Highlights the referenced line range briefly.

@@ -48,6 +48,20 @@ local function current_path()
   return vim.fn.expand '%:p'
 end
 
+local function trigger_yank_animation(start_line, end_line)
+  local view = vim.fn.winsaveview()
+
+  pcall(function()
+    if start_line == end_line then
+      vim.cmd(('silent keepjumps normal! %dG"_yy'):format(start_line))
+    else
+      vim.cmd(('silent keepjumps normal! %dG"_V%dG"_y'):format(start_line, end_line))
+    end
+  end)
+
+  vim.fn.winrestview(view)
+end
+
 function M.yank()
   local path = current_path()
   local start_line = vim.fn.line 'v'
@@ -59,11 +73,12 @@ function M.yank()
 
   local line_reference = config.line_prefix .. start_line
   if start_line ~= end_line then
-    line_reference = line_reference .. '-' .. end_line
+    line_reference = line_reference .. '-' .. config.line_prefix .. end_line
   end
 
   local reference = config.prefix .. path .. config.separator .. line_reference
 
+  trigger_yank_animation(start_line, end_line)
   vim.fn.setreg(config.clipboard_register, reference)
   highlight_range(start_line, end_line)
 
