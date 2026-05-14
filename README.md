@@ -17,7 +17,7 @@ With [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
-  'your-github-username/reference-yank.nvim',
+  'erodactyl/reference-yank.nvim',
 }
 ```
 
